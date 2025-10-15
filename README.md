@@ -11,10 +11,10 @@ The project demonstrates the use of structured programming, pointer parameter pa
 
 | Command | Description |
 |----------|--------------|
-| `L` | Process exactly **1 live packet** and display telemetry. |
-| `R` | Run **N simulated ticks** silently, then display the final telemetry packet. |
-| `T` | **Fire thruster** to reduce orientation error by up to 5°, costs 3% battery. Ignored in SAFE-MODE or when battery < 5%. |
-| `S` | **Toggle SAFE-MODE** on/off. Restricts commands and clamps drift. |
+| `L` | Process exactly 1 live packet and display telemetry. |
+| `R` | Run N simulated ticks silently, then display the final telemetry packet. |
+| `T` | Fire thruster to reduce orientation error by up to 5°, costs 3% battery. Ignored in SAFE-MODE or when battery < 5%. |
+| `S` | Toggle SAFE-MODE on/off. Restricts commands and clamps drift. |
 | `Q` | Quit mission and print final telemetry state. |
 
 

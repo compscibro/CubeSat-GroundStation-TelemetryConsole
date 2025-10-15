@@ -2,7 +2,7 @@
 .DS_Store
 
 # Script files
-main
+typescript_main
 
 # Compiled object files
 *.o

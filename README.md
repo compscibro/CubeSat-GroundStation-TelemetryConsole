@@ -5,18 +5,7 @@
 
 The project demonstrates the use of structured programming, pointer parameter passing, random number generation (`rand()`/`srand()`), modular function design, and formatted output in tabular form.
 
----
 
-## 🎯 Objectives
-This project was developed as part of a systems programming assignment to:
-- Practice **structured procedural design** in C.
-- Use **pointer parameters** to simulate state updates.
-- Handle **user input safely** with `fgets()` and `sscanf()` (no `scanf()`).
-- Generate and interpret **telemetry packets** through random drift and system constraints.
-- Implement command processing and mode toggling using `switch` logic.
-- Maintain strict output formatting to match test scripts run on the **Zeus** server.
-
----
 
 ## ⚙️ Features
 
@@ -28,52 +17,57 @@ This project was developed as part of a systems programming assignment to:
 | `S` | **Toggle SAFE-MODE** on/off. Restricts commands and clamps drift. |
 | `Q` | Quit mission and print final telemetry state. |
 
----
 
-## 🧩 Core Functions
-```bash
-void initialState(unsigned int *timestamp, int *temp, unsigned int *battery, int *orient_err)
+
+## 🎥 Demo
+[![Demo Video](https://img.youtube.com/vi/jMWRyZtGA0c/0.jpg)](https://youtu.be/jMWRyZtGA0c)
+
+
+
+## 📁 Project Structure
+
 ```
-Initializes the CubeSat’s telemetry parameters to default safe values.
+CUBESAT-GROUNDSTATION-TELEMETRYCONSOLE/
+│
+├── src/
+│   └── main.c                 # All source code goes here (clean separation)
+├── .gitignore                 # Ignore executables, temp, and TypeScript logs
+├── Makefile                   # Builds and runs the project on Zeus or locally
+└── README.md                  # Full documentation (project overview, build steps)
 
-```bash
-void generatePacket(unsigned int *timestamp, int *temp, unsigned int *battery, int *orient_err, int safe_mode)
 ```
-Simulates one telemetry tick by updating temperature, orientation error, and battery using pseudo-random changes. Handles **SAFE-MODE** behavior and radiation events.
 
-```bash
-void printPacket(unsigned int timestamp, int temp, unsigned int battery, int orient_err, int safe_mode)
-```
-Prints a formatted telemetry table matching the grader’s expected output. Adjusts singular/plural units for orientation error (“degree” vs “degrees”).
 
-```bash
-void handleCommand(char command, unsigned int *timestamp, int *temp, unsigned int *battery, int *orient_err, int *safe_mode, int *abort_flag)
-```
-Interprets and executes user commands. Validates inputs, enforces SAFE-MODE rules, and updates the system state.
 
-```bash
-int checkAbort(int temp, unsigned int battery, int orient_err)
-```
-Checks for mission failure due to:
-- Temperature out of range ( < −20 °C or > 90 °C )  
-- Battery depletion ( 0% )  
-- Orientation error exceeding 45° for more than 3 consecutive ticks  
+## 🧱 Project Architecture
 
----
+The CubeSat Ground-Station Telemetry Console follows a **modular procedural architecture** emphasizing clear function responsibility and deterministic simulation.
 
-## 🧠 Design Notes
+### **Core Components**
+- **Main Control Loop (`main.c`)** – Handles command input, user prompts, and mission flow.
+- **Initialization (`initialState`)** – Establishes safe baseline state before simulation begins.
+- **Telemetry Module (`generatePacket`)** – Simulates CubeSat behavior (temperature, battery, and orientation error).  
+- **Display Module (`printPacket`)** – Outputs formatted telemetry tables.  
+- **Command Processor (`handleCommand`)** – Parses commands (`L`, `R`, `T`, `S`, `Q`) and updates state.  
+- **Safety & Abort Logic (`checkAbort`)** – Monitors for mission-critical parameter violations.  
 
-- **Pointer parameters** are used in state-modifying functions (`initialState`, `generatePacket`, `handleCommand`) so changes persist across function calls.  
-- **Value parameters** are used in `printPacket` and `checkAbort` since these functions only read the state.  
-- **SAFE-MODE** clamps temperature/orientation drift to ±1 per tick and disables radiation upsets.  
-- **Random sequences** are consistent on Zeus when the same seed is entered, ensuring deterministic grading.  
-- **All user inputs** are read using `fgets()` + `sscanf()` to prevent buffer overflows.
+### **Data Flow**
+1. **User Input → Command Handler**  
+2. **Command Handler → Telemetry Generator**  
+3. **Telemetry Generator → Output Display + Abort Checker**  
+4. **Loop repeats** until mission abort or manual quit.
 
----
+This architecture maintains **separation of concerns**, improving readability, maintainability, and portability between UNIX systems such as **Zeus**.
+
+
 
 ## 🖥️ Compilation & Execution
 
 Compile using:
+```bash
+make all
+```
+OR
 ```bash
 gcc -Wall -pedantic-errors -std=c99 main.c -o main
 ```
@@ -101,37 +95,3 @@ Enter an integer seed: 1
 |       1 |       26 |       99 |       +1 degree    | NORMAL     |
 +---------+----------+----------+--------------------+------------+
 ```
-
----
-
-## 🧪 Testing Instructions
-
-- **Compile and run on Zeus** (`gcc -std=c99`) to ensure grading consistency
-- Enter the **same integer seed** as used in the grading sample (e.g., 1) for deterministic results
-- Verify that each telemetry packet, SAFE-MODE toggle, and abort message matches the provided reference output
-- Do **not** modify formatting or spacing in the telemetry table
-
----
-
-## 📁 Structure
-
-```
-CUBESAT-GROUNDSTATION-TELEMETRYCONSOLE/
-│
-├── src/
-│   └── main.c                 # All source code goes here (clean separation)
-│
-├── .gitignore                 # Ignore executables, temp, and TypeScript logs
-├── Makefile                   # Builds and runs the project on Zeus or locally
-├── typescript_main            # Reference output (for verification)
-└── README.md                  # Full documentation (project overview, build steps)
-
-```
-
----
-
-## 🚀 Key Learning Outcomes
-- Practical application of **C pointers and memory safety**.
-- Controlled random simulation of physical telemetry systems.
-- Modular decomposition and strict **I/O specification adherence**.
-- Proper **testing discipline on shared UNIX servers (Zeus)**.

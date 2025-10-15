@@ -1,0 +1,23 @@
+# macOS system file
+.DS_Store
+
+# Script files
+p1_typescript_mabdurr2_202
+
+# Compiled object files
+*.o
+
+# Compiled dynamic libraries
+*.so
+
+# Compiled static libraries
+*.a
+
+# Executable files (Linux/mac)
+a.out
+*.out
+main
+program
+
+# Executable files (Windows)
+*.exe

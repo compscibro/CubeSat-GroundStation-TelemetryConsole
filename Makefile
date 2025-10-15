@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -pedantic-errors -std=c99
 
-TARGET = p1_mabdurr2_202
+TARGET = main
 
 all: $(TARGET)
 

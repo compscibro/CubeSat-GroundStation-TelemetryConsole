@@ -1,9 +1,9 @@
 # 🛰️ CubeSat Ground-Station Telemetry Console
 
+
 **CubeSat Ground-Station Telemetry Console** is a command-line simulation written in C that emulates live satellite telemetry. The system simulates temperature drift, battery drain, and orientation error over time. It supports commands to process live packets, run multiple ticks, fire thrusters, toggle **SAFE-MODE**, and safely terminate the mission.
 
 The project demonstrates the use of structured programming, pointer parameter passing, random number generation (`rand()`/`srand()`), modular function design, and formatted output in tabular form.
-
 
 
 ## ⚙️ Features
@@ -17,10 +17,14 @@ The project demonstrates the use of structured programming, pointer parameter pa
 | `Q` | Quit mission and print final telemetry state. |
 
 
-
 ## 🎥 Demo
 [![Demo Video](https://img.youtube.com/vi/jMWRyZtGA0c/0.jpg)](https://youtu.be/jMWRyZtGA0c)
 
+## ⏳ Program Flow Diagram
+
+<p align="center">
+  <img src="charts/Flowchart.png" alt="Program Flow Diagram" width="700">
+</p>
 
 
 ## 📁 Project Structure
@@ -35,7 +39,6 @@ CUBESAT-GROUNDSTATION-TELEMETRYCONSOLE/
 └── README.md                  # Full documentation (project overview, build steps)
 
 ```
-
 
 
 ## 🧱 Project Architecture
@@ -57,7 +60,6 @@ The CubeSat Ground-Station Telemetry Console follows a **modular procedural arch
 4. **Loop repeats** until mission abort or manual quit.
 
 This architecture maintains **separation of concerns**, improving readability, maintainability, and portability between UNIX systems such as **Zeus**.
-
 
 
 ## 🖥️ Compilation & Execution
